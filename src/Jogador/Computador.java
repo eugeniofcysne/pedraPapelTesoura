@@ -21,7 +21,7 @@ public class Computador extends Jogador implements Trapaca{
 
 protected Escolha escolher() {
 	Random rand = new Random();
-	int n = 1+rand.nextInt(3);
+	int n = 1+rand.nextInt(5);
 	System.out.println("n = "+n);
 	 
 	switch (n) {
@@ -31,6 +31,10 @@ protected Escolha escolher() {
 		return Escolha.PAPEL;
 	case 3:
 		return Escolha.TESOURA;
+	case 4:
+		return Escolha.LAGARTO;
+	case 5:
+		return Escolha.SPOCK;
 	default:
 		return null;
 	}

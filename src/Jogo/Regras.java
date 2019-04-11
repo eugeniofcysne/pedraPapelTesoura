@@ -16,6 +16,12 @@ public class Regras {
 		case TESOURA:
 			resultado = this.tesouraContra(adversario.getEscolha());
 			break;
+		case SPOCK:
+			resultado = this.spockContra(adversario.getEscolha());
+			break;
+		case LAGARTO:
+			resultado = this.lagartoContra(adversario.getEscolha());
+			break;
 		default:
 			break;
 		}
@@ -45,6 +51,14 @@ public class Regras {
 		case TESOURA:
 			resultado = Resultado.GANHOU;
 			break;
+			
+		case LAGARTO:
+			resultado = Resultado.GANHOU;
+			break;
+			
+		case SPOCK:
+			resultado = Resultado.PERDEU;
+			break;
 		default:
 			break;
 		}
@@ -64,6 +78,15 @@ public class Regras {
 		case TESOURA:
 			resultado = Resultado.PERDEU;
 			break;
+			
+		case LAGARTO:
+			resultado = Resultado.PERDEU;
+			break;
+			
+		case SPOCK:
+			resultado = Resultado.GANHOU;
+			break;
+			
 		default:
 			break;
 		}
@@ -83,12 +106,72 @@ public class Regras {
 		case TESOURA:
 			resultado = Resultado.EMPATOU;
 			break;
+			
+			
+		case LAGARTO:
+			resultado = Resultado.GANHOU;
+			break;
+			
+		case SPOCK:
+			resultado = Resultado.PERDEU;
+			break;
 		default:
 			break;
 		}
 		return resultado;
 	}
 
+	protected Resultado lagartoContra(Escolha escolha) {
+
+		Resultado resultado = null;
+		switch (escolha) {
+		case PEDRA:
+			resultado = Resultado.PERDEU;
+			break;
+		case PAPEL:
+			resultado = Resultado.GANHOU;
+			break;
+		case TESOURA:
+			resultado = Resultado.PERDEU;
+			break;
+		case SPOCK:
+			resultado = Resultado.GANHOU;
+			break;
+		case LAGARTO:
+			resultado = Resultado.EMPATOU;
+			break;
+		default:
+			break;
+		}
+		return resultado;
+	}
+	
+	protected Resultado spockContra(Escolha escolha) {
+
+		Resultado resultado = null;
+		switch (escolha) {
+		case PEDRA:
+			resultado = Resultado.GANHOU;
+			break;
+		case PAPEL:
+			resultado = Resultado.PERDEU;
+			break;
+		case TESOURA:
+			resultado = Resultado.GANHOU;
+			break;
+		case LAGARTO:
+			resultado = Resultado.PERDEU;
+			break;
+			
+		case SPOCK:
+			resultado = Resultado.EMPATOU;
+			break;
+		default:
+			break;
+		}
+		return resultado;
+	}
+	
 	{
 // if((jogador1.getEscolha()-jogador2.getEscolha())==1 || (jogador1.getEscolha()-jogador2.getEscolha()==-2)){
 //	return jogador1;
