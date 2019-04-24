@@ -7,9 +7,9 @@ import Jogo.Escolha;
 public class Computador extends Jogador implements Trapaca{
 
 	
-	public Computador() {
+	public Computador(String nomeComputador) {
 		super();
-		String nome = this.gerarNome();
+		String nome = nomeComputador;
 		Escolha escolhaComputador = this.escolher();
 		this.setNome(nome);
 		this.setEscolha(escolhaComputador);
@@ -36,6 +36,7 @@ protected Escolha escolher() {
 	case 5:
 		return Escolha.SPOCK;
 	default:
+		System.out.println(" Sorteio furado ");
 		return null;
 	}
 }

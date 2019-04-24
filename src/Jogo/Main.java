@@ -17,6 +17,7 @@ public class Main {
 		while (decisao == true) {
 
 			Jogador bruno = null;
+			
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("Qual a jogada de Bruno? 1 para pedra, 2 para papel, 3 para tesoura, 4 para lagarto, 5 para Spock");
 			int decisaoPlayer = scanner.nextInt();
@@ -41,18 +42,44 @@ public class Main {
 				System.out.println("ERRO");
 			}
 
-			Computador computador = new Computador();
-			// Trapaca trapaceiro = computador;
-			// trapaceiro.trocaEscolha(Escolha.TESOURA);
+			Scanner cebola = new Scanner(System.in);
+			System.out.println("Quantos computadores você quer?");
+			int qtdComputadores = scanner.nextInt();
+			System.out.println(qtdComputadores);
+			
+			String nomeComputador="Computador";
+			String qtdComp=Integer.toString(qtdComputadores);
+					
+			Computador computador[] = new Computador[qtdComputadores];
+			
+			for(int i=0;i<qtdComputadores;i++) {
+				
+				nomeComputador=nomeComputador.substring(0,10);
+				
+				nomeComputador=nomeComputador.concat(Integer.toString(i+1));
+				System.out.println(nomeComputador);
+				computador[i]= new Computador(nomeComputador);
+			
+				System.out.println(computador[i]);
+			}
+			Jogador[] jogadores= new Jogador[qtdComputadores+1];
+			for(int i = 0; i<qtdComputadores; i++) {
+				jogadores[i]=computador[i];
+			}
+			jogadores[qtdComputadores]=bruno;
 			Regras regras = new Regras();
-			Jogador ganhador = regras.jogar(bruno, computador);
-			imprimirGanhador(ganhador);
-			if (ganhador == bruno) {
-				vitoriaBruno++;
-			} else if (ganhador == computador) {
-				vitoriaComputador++;
-			} else
-				empate++;
+			int[] contaEscolhas=regras.calculaEscolhas(jogadores);
+			Escolha escolhaVencedora = regras.decidirVencedor(contaEscolhas);
+			
+			if(escolhaVencedora !=null) {
+				for (int i=0; i<qtdComputadores;i++) {
+					if (jogadores[i].getEscolha()==escolhaVencedora) {
+						System.out.println(jogadores[i].getNome()+" VENCEU");
+					}
+				}				
+			} else {
+				System.out.println("DEU EMPATE");
+			}
 			Scanner scanner2 = new Scanner(System.in);
 			System.out.println("deseja jogar de novo? 1 para sim, 2 para nao");
 			int resposta = scanner2.nextInt();
@@ -60,12 +87,13 @@ public class Main {
 			if (resposta == 2) {
 				decisao = false;
 			}
-		}
-		System.out.println("número de empates: "+empate);
-		System.out.println("número de vitorias bruno: "+vitoriaBruno);
-		System.out.println("número de vitorias computador: "+vitoriaComputador);
+		} // fim do while
+		
 
-	}
+		
+		
+		
+	} // fim do main
 
 	private static void imprimirGanhador(Jogador ganhador) {
 
@@ -77,9 +105,4 @@ public class Main {
 		System.out.println(ganhador);
 	}
 
-//	Jogador vencedor = regras.jogar(alexandre, computador);
-//	imprimirGanhador(vencedor);
-
-	// Jogador vencedor = regras.jogar(computador, bruno);
-	// System.out.println("O ganhador é : " + vencedor.getNome());
 }

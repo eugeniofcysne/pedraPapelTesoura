@@ -4,180 +4,62 @@ import Jogador.Jogador;
 
 public class Regras {
 
-	public Jogador jogar(Jogador jogador, Jogador adversario) {
-		Resultado resultado = null;
-		switch (jogador.getEscolha()) {
-		case PEDRA:
-			resultado = this.pedraContra(adversario.getEscolha());
-			break;
-		case PAPEL:
-			resultado = this.papelContra(adversario.getEscolha());
-			break;
-		case TESOURA:
-			resultado = this.tesouraContra(adversario.getEscolha());
-			break;
-		case SPOCK:
-			resultado = this.spockContra(adversario.getEscolha());
-			break;
-		case LAGARTO:
-			resultado = this.lagartoContra(adversario.getEscolha());
-			break;
-		default:
-			break;
-		}
-			if (resultado == Resultado.GANHOU) {
-				return jogador;
+	public Escolha decidirVencedor(int[] contaEscolhas) {
 
-			} else if (resultado == Resultado.PERDEU) {
-				return adversario;
-				
-			} else if (resultado == Resultado.EMPATOU) {
-				return null;
+		int pedra = contaEscolhas[0];
+		int papel = contaEscolhas[1];
+		int tesoura = contaEscolhas[2];
+		int lagarto = contaEscolhas[3];
+		int spock = contaEscolhas[4];
+
+		if ((lagarto + tesoura) > 0 && (papel + spock) == 0) {
+			return Escolha.PEDRA;
+		} else if ((pedra + spock) > 0 && (tesoura + lagarto) == 0) {
+			return Escolha.PAPEL;
+		} else if ((papel + lagarto) > 0 && (pedra + spock) == 0) {
+			return Escolha.TESOURA;
+		} else if ((papel + spock) > 0 && (pedra + tesoura) == 0) {
+			return Escolha.LAGARTO;
+		} else if ((papel + tesoura) > 0 && (papel + lagarto) == 0) {
+			return Escolha.SPOCK;
+		} else {
+			return null;
+		}
+	}
+
+	public int[] calculaEscolhas(Jogador[] jogadores) {
+
+		int contaEscolhas[] = { 0, 0, 0, 0, 0 };// new int[5];
+		// for (int j =0; j<5;j++) {
+		// contaEscolhas[j]=0;
+		// }
+		for (int i = 0; i < jogadores.length; i++) {
+			switch (jogadores[i].getEscolha()) {
+			case PEDRA:
+				contaEscolhas[0]++;
+				System.out.println(contaEscolhas[0]);
+				break;
+			case PAPEL:
+				contaEscolhas[1]++;
+				System.out.println(contaEscolhas[1]);
+				break;
+			case TESOURA:
+				contaEscolhas[2]++;
+				System.out.println(contaEscolhas[2]);
+				break;
+			case LAGARTO:
+				contaEscolhas[3]++;
+				System.out.println(contaEscolhas[3]);
+				break;
+			case SPOCK:
+				contaEscolhas[4]++;
+				System.out.println(contaEscolhas[4]);
+				break;
+			default:
+				System.out.println("Escolha -->" + jogadores[i].getEscolha());
 			}
-		
-		return null;
-	}
-
-	protected Resultado pedraContra(Escolha escolha) {
-
-		Resultado resultado = null;
-		switch (escolha) {
-		case PEDRA:
-			resultado = Resultado.EMPATOU;
-			break;
-		case PAPEL:
-			resultado = Resultado.PERDEU;
-			break;
-		case TESOURA:
-			resultado = Resultado.GANHOU;
-			break;
-			
-		case LAGARTO:
-			resultado = Resultado.GANHOU;
-			break;
-			
-		case SPOCK:
-			resultado = Resultado.PERDEU;
-			break;
-		default:
-			break;
 		}
-		return resultado;
-	}
+		return contaEscolhas;
 
-	protected Resultado papelContra(Escolha escolha) {
-
-		Resultado resultado = null;
-		switch (escolha) {
-		case PEDRA:
-			resultado = Resultado.GANHOU;
-			break;
-		case PAPEL:
-			resultado = Resultado.EMPATOU;
-			break;
-		case TESOURA:
-			resultado = Resultado.PERDEU;
-			break;
-			
-		case LAGARTO:
-			resultado = Resultado.PERDEU;
-			break;
-			
-		case SPOCK:
-			resultado = Resultado.GANHOU;
-			break;
-			
-		default:
-			break;
-		}
-		return resultado;
-	}
-
-	protected Resultado tesouraContra(Escolha escolha) {
-
-		Resultado resultado = null;
-		switch (escolha) {
-		case PEDRA:
-			resultado = Resultado.PERDEU;
-			break;
-		case PAPEL:
-			resultado = Resultado.GANHOU;
-			break;
-		case TESOURA:
-			resultado = Resultado.EMPATOU;
-			break;
-			
-			
-		case LAGARTO:
-			resultado = Resultado.GANHOU;
-			break;
-			
-		case SPOCK:
-			resultado = Resultado.PERDEU;
-			break;
-		default:
-			break;
-		}
-		return resultado;
-	}
-
-	protected Resultado lagartoContra(Escolha escolha) {
-
-		Resultado resultado = null;
-		switch (escolha) {
-		case PEDRA:
-			resultado = Resultado.PERDEU;
-			break;
-		case PAPEL:
-			resultado = Resultado.GANHOU;
-			break;
-		case TESOURA:
-			resultado = Resultado.PERDEU;
-			break;
-		case SPOCK:
-			resultado = Resultado.GANHOU;
-			break;
-		case LAGARTO:
-			resultado = Resultado.EMPATOU;
-			break;
-		default:
-			break;
-		}
-		return resultado;
-	}
-	
-	protected Resultado spockContra(Escolha escolha) {
-
-		Resultado resultado = null;
-		switch (escolha) {
-		case PEDRA:
-			resultado = Resultado.GANHOU;
-			break;
-		case PAPEL:
-			resultado = Resultado.PERDEU;
-			break;
-		case TESOURA:
-			resultado = Resultado.GANHOU;
-			break;
-		case LAGARTO:
-			resultado = Resultado.PERDEU;
-			break;
-			
-		case SPOCK:
-			resultado = Resultado.EMPATOU;
-			break;
-		default:
-			break;
-		}
-		return resultado;
-	}
-	
-	{
-// if((jogador1.getEscolha()-jogador2.getEscolha())==1 || (jogador1.getEscolha()-jogador2.getEscolha()==-2)){
-//	return jogador1;
-//} else if ((jogador2.getEscolha()-jogador1.getEscolha())==1 || (jogador2.getEscolha()-jogador1.getEscolha()==-2)){
-// return jogador2;
-//} else
-// return null;
 	}
 }
