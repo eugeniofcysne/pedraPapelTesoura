@@ -7,15 +7,14 @@ import Jogador.Computador;
 
 public class Main {
 
+	
 	public static void main(String[] args) {
 
 		boolean decisao = true;
 
-		int vitoriaBruno = 0;
-		int vitoriaComputador = 0;
-		int empate = 0;
+		int numeroRodada=0;
 		while (decisao == true) {
-
+			numeroRodada++;
 			Jogador bruno = null;
 			
 			Scanner scanner = new Scanner(System.in);
@@ -30,8 +29,7 @@ public class Main {
 				break;
 			case 3:
 				bruno = new Jogador("Bruno", Escolha.TESOURA);
-				break;
-				
+				break;				
 			case 4:
 				bruno = new Jogador("Bruno", Escolha.LAGARTO);
 				break;
@@ -74,12 +72,14 @@ public class Main {
 			if(escolhaVencedora !=null) {
 				for (int i=0; i<qtdComputadores;i++) {
 					if (jogadores[i].getEscolha()==escolhaVencedora) {
-						System.out.println(jogadores[i].getNome()+" VENCEU");
+						jogadores[i].setResultado(); //define o resultado como "GANHOU"
+						System.out.println(jogadores[i].getNome()+" "+jogadores[i].getResultado());
 					}
 				}				
 			} else {
 				System.out.println("DEU EMPATE");
 			}
+			BancoDeDados.gravarPartida(jogadores, escolhaVencedora, numeroRodada);
 			Scanner scanner2 = new Scanner(System.in);
 			System.out.println("deseja jogar de novo? 1 para sim, 2 para nao");
 			int resposta = scanner2.nextInt();
@@ -88,21 +88,7 @@ public class Main {
 				decisao = false;
 			}
 		} // fim do while
-		
-
-		
-		
-		
+				
 	} // fim do main
 
-	private static void imprimirGanhador(Jogador ganhador) {
-
-		if (ganhador == null) {
-			System.out.println("empate!");
-		} else {
-			System.out.println(" o ganhador 'e: " + ganhador.getNome());
-		}
-		System.out.println(ganhador);
-	}
-
-}
+} //fim da classe

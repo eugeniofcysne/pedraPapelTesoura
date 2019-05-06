@@ -1,15 +1,18 @@
 package Jogador;
 
 import Jogo.Escolha;
+import Jogo.Resultado;
 
 public class Jogador {
 
 	private Escolha escolha;
 	private String nome;
+	private Resultado resultado;
 
 	public Jogador(String nome, Escolha escolha) {
 		this.escolha = escolha;
 		this.nome = nome;
+		this.resultado=Resultado.PERDEU;
 	}
 	
 	protected Jogador() {
@@ -23,13 +26,19 @@ public class Jogador {
 	public String getNome() {
 		return nome;
 	}
-
+	public Resultado getResultado() {
+		return resultado;
+	}
 	protected void setEscolha(Escolha escolha) {
 		this.escolha = escolha;
 	}
 
 	protected void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public void setResultado() {
+		this.resultado=Resultado.GANHOU;
 	}
 
 	@Override
